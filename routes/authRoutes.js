@@ -55,7 +55,9 @@ router.post('/login', async (req, res) => {
         }
 
         if (results.length === 0) {
-            return res.status(400).json({ error: 'Usuário ou senha incorretos' });
+            // return res.status(400).json({ message: 'credencial invalida!', });
+            return res.json({ message: 'usuario invalido!', });
+            // return res.status(401).json({ message: 'credencial invalida!', });
         }
 
         const user = results[0];
@@ -63,7 +65,8 @@ router.post('/login', async (req, res) => {
         // 2. Comparar hash da senha
         const senhaCorreta = bcrypt.compareSync(password, user.password_hash);
         if (!senhaCorreta) {
-            return res.status(400).json({ error: 'Usuário ou senha incorretos' });
+            return res.json({ message: 'credenciais invalidas!', });
+            // return res.status(400).json({ error: 'Usuário ou senha incorretos' });
         }
 
         // 3. Criar sessão e armazenar no Map

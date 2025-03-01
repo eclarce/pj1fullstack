@@ -52,14 +52,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
           // Redireciona para a página PaginaBemVindo.html após o login
           window.location.href = 'PaginaBemVindo.html';
-        } else {
-          messageDiv.textContent = 'Erro no login: ' + data.error;
+        }
+        else if (data.message === 'usuario invalido!') {
+          console.log("entrei aqui");
+          messageDiv.textContent = 'Usuário não encontrado';
+          messageDiv.style.color = 'red';
+        }
+
+        else {
+          messageDiv.textContent = 'Usuário ou senha incorretos';
           messageDiv.style.color = 'red';
         }
       })
       .catch((error) => {
         console.error('Erro:', error);
-        messageDiv.textContent = 'Erro ao conectar ao servidor.';
+        messageDiv.textContent = 'Erro ao conectar ao servidorr.';
         messageDiv.style.color = 'red';
       });
   }
