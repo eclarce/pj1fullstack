@@ -18,5 +18,5 @@ app.use('/auth', authRoutes);
 app.use('/',express.static(path.join(__dirname, 'resources'),{ index: 'PaginaLogin.html'}))
 
 app.listen(PORT, () => {
-    console.log(`Servidor rodando na porta ${PORT}`);
+    console.log(`Servidor rodando na porta: ${PORT}`);
 });
