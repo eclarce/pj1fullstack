@@ -48,7 +48,7 @@ router.post('/login', async (req, res) => {
     }
 
     // 1. Buscar usuário no banco
-    db.query('SELECT * FROM users WHERE username = ?', [name],  (err, results) => {
+    db.query('SELECT * FROM users WHERE username = ?', [name], (err, results) => {
         if (err) {
             console.error('Erro ao buscar usuário no banco:', err);
             return res.status(500).json({ error: 'Erro interno' });
@@ -77,7 +77,8 @@ router.post('/login', async (req, res) => {
 
         console.log(`Sessão criada: ${sessionId} para ${user.username}`);
 
-        res.json({ sessionId, 
+        res.json({
+            sessionId,
             message: 'Login bem-sucedido!',
             username: user.username
         });
@@ -87,7 +88,7 @@ router.post('/login', async (req, res) => {
 
 // Rota para servir a página de boas-vindas (acesso protegido)
 router.get('/PaginaBemVindo.html', authMiddleware, (req, res) => {
-  res.sendFile(path.join(__dirname, '../resources', 'PaginaBemVindo.html'));
+    res.sendFile(path.join(__dirname, '../resources', 'PaginaBemVindo.html'));
 });
 
 module.exports = router;

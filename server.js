@@ -15,7 +15,15 @@ app.use(cookieParser())
 
 // Usando as rotas de autenticação
 app.use('/auth', authRoutes);
-app.use('/',express.static(path.join(__dirname, 'resources'),{ index: 'PaginaLogin.html'}))
+// app.use('/',express.static(path.join(__dirname, 'resources'),{ index: 'PaginaLogin.html'}));
+
+// Servir arquivos estáticos públicos (CSS, JS, etc.) da pasta resources
+app.use(express.static(path.join(__dirname, 'resources')));
+
+// Rota para servir a página de login (acesso público)
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'resources', 'PaginaLogin.html'));
+});
 
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta: ${PORT}`);
