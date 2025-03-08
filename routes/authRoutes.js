@@ -85,4 +85,9 @@ router.post('/login', async (req, res) => {
     });
 });
 
+// Rota para servir a página de boas-vindas (acesso protegido)
+router.get('/PaginaBemVindo.html', authMiddleware, (req, res) => {
+  res.sendFile(path.join(__dirname, '../resources', 'PaginaBemVindo.html'));
+});
+
 module.exports = router;

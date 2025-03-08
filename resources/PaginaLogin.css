@@ -76,16 +76,17 @@ body {
 
   background-color: var(--primary-200);
 }
+
 .forgot-password {
-    margin-top: 10px;
-    text-align: right;
-    color: var(--text-200);
-    font-size: 12px;
+  margin-top: 10px;
+  text-align: right;
+  color: var(--text-200);
+  font-size: 12px;
 }
 
 .forgot-password:hover {
-    color: var(--primary-300);
-    text-decoration-color: var(--primary-300);
+  color: var(--primary-300);
+  text-decoration-color: var(--primary-300);
 }
 
 .message {

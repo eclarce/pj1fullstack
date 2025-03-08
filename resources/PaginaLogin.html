@@ -1,39 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="PaginaLogin.css" />
-    <title>Login</title>
-  </head>
-  <body>
-    <form id="loginForm" class="login-container">
-      <h2>Login</h2>
 
-      <input
-        required
-        type="text"
-        id="username"
-        placeholder="Nome de usuário"
-        oninput="validateInput()"
-      />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="PaginaLogin.css" />
+  <title>Login</title>
+</head>
 
-      <input
-        required
-        type="password"
-        id="password"
-        placeholder="Senha"
-        oninput="validateInput()"
-      />
+<body>
+  <form id="loginForm" class="login-container">
+    <h2>Login</h2>
 
-      <button id="loginButton" type="submit" disabled>Login</button>
-      <div id="message" class="message"></div>
+    <input required type="text" id="username" placeholder="Nome de usuário" oninput="validateInput()" />
 
-      <a href="forgotPassword.html" class="forgot-password">
-        Esqueci minha senha</a
-      >
-    </form>
-    <!-- Certifique-se de que o caminho para script.js está correto -->
-    <script src="script.js"></script>
-  </body>
+    <input required type="password" id="password" placeholder="Senha" oninput="validateInput()" />
+
+    <button id="loginButton" type="submit" disabled>Login</button>
+    <div id="message" class="message"></div>
+
+    <a href="forgotPassword.html" class="forgot-password">
+      Esqueci minha senha</a>
+  </form>
+  <!-- Certifique-se de que o caminho para script.js está correto -->
+  <script src="script.js"></script>
+</body>
+
 </html>
