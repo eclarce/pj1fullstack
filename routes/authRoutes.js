@@ -8,7 +8,6 @@ const bcrypt = require('bcrypt');
 
 const sessions = new Map();
 
-// Middleware de autenticação
 const authMiddleware = async (req, res, next) => {
     const authHeader = req.headers['authorization'];
 
@@ -35,6 +34,11 @@ const authMiddleware = async (req, res, next) => {
     next();
 };
 
+router.get('/session', authMiddleware, (req, res) => {
+    const user = req.user
+    res.json({ user })
+})
+
 // Rotas
 router.post('/users', authController.createUser);
 router.get('/users', authMiddleware, authController.getUsers);
@@ -56,7 +60,7 @@ router.post('/login', async (req, res) => {
 
         if (results.length === 0) {
             // return res.status(400).json({ message: 'credencial invalida!', });
-            return res.json({ message: 'usuario invalido!', });
+            return res.json({ error: 'Credenciais incorretas', });
             // return res.status(401).json({ message: 'credencial invalida!', });
         }
 
@@ -65,30 +69,22 @@ router.post('/login', async (req, res) => {
         // 2. Comparar hash da senha
         const senhaCorreta = bcrypt.compareSync(password, user.password_hash);
         if (!senhaCorreta) {
-            return res.json({ message: 'credenciais invalidas!', });
+            return res.json({ error: 'Credenciais incorretas', });
             // return res.status(400).json({ error: 'Usuário ou senha incorretos' });
         }
 
         // 3. Criar sessão e armazenar no Map
         const sessionId = crypto.randomUUID();
-        sessions.set(sessionId, { id: user.id, username: user.username });
+        const sessionUser = { id: user.id, username: user.username }
+        sessions.set(sessionId, sessionUser );
 
         console.log(sessions)
 
         console.log(`Sessão criada: ${sessionId} para ${user.username}`);
 
-        res.json({
-            sessionId,
-            message: 'Login bem-sucedido!',
-            username: user.username
-        });
-        // res.send(sessionId);
+        res.json({ sessionId });
     });
 });
 
-// Rota para servir a página de boas-vindas (acesso protegido)
-router.get('/PaginaBemVindo.html', authMiddleware, (req, res) => {
-    res.sendFile(path.join(__dirname, '../resources', 'PaginaBemVindo.html'));
-});
 
 module.exports = router;

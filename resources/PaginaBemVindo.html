@@ -1,13 +1,60 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="PaginaBemVindo.css" />
-    <title>Página de Bem-Vindo</title>
-  </head>
-  <body>
-    <h1>Bem-Vindo!</h1>
-    <p>Estamos felizes em tê-lo aqui.</p>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="PaginaBemVindo.css" />
+  <title>Página de Bem-Vindo</title>
+</head>
+
+<body>
+  <h1>Bem-Vindo!</h1>
+  <p>Estamos felizes em tê-lo aqui.</p>
+  <h1 id="usuario">??</h1>
+  <script>
+    fetch('/auth/session', {
+      headers: {
+        authorization: 'Bearer ' + localStorage.getItem('sessionId'),
+        'Content-Type': 'application/json',
+      },
+      method: 'GET',
+    })
+      .then((response) => {
+        // equivale a checar status code != 200, 300 tudo acima de 400
+        if (!response.ok) {
+          throw new Error('Erro na requisição');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log(`session`,data)
+        document.getElementById("usuario").innerHTML = data.user.username
+        // // Exibe a mensagem de sucesso ou erro
+        // if (data.message === 'Login bem-sucedido!') {
+        //   messageDiv.textContent = 'Login realizado com sucesso!';
+        //   messageDiv.style.color = 'green';
+
+        //   // Armazena o sessionId no localStorage (ou sessionStorage)
+        //   localStorage.setItem('sessionId', data.sessionId);
+
+        //   // Redireciona para a página PaginaBemVindo.html após o login
+        //   window.location.href = 'PaginaBemVindo.html';
+        // }
+        // else if (data.message === 'usuario invalido!') {
+        //   console.log("entrei aqui");
+        //   messageDiv.textContent = 'Usuário não encontrado';
+        //   messageDiv.style.color = 'red';
+        // }
+
+        // else {
+        //   messageDiv.textContent = 'Usuário ou senha incorretos';
+        //   messageDiv.style.color = 'red';
+        // }
+      })
+     
+  </script>
+</body>
+
+
 </html>

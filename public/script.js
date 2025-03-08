@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', function () {
   //     loginButton.disabled = true;
   //   }
   // }
-  
 
   // Função para realizar o login
   function login(event) {
@@ -42,12 +41,9 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         return response.json();
       })
-      .then((data) => {        
-        if (data.error) {
-          messageDiv.textContent = data.error
-          messageDiv.style.color = 'red';
-        } else {
-
+      .then((data) => {
+        // Exibe a mensagem de sucesso ou erro
+        if (data.message === 'Login bem-sucedido!') {
           messageDiv.textContent = 'Login realizado com sucesso!';
           messageDiv.style.color = 'green';
 
@@ -56,6 +52,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
           // Redireciona para a página PaginaBemVindo.html após o login
           window.location.href = 'PaginaBemVindo.html';
+        }
+        else if (data.message === 'usuario invalido!') {
+          console.log("entrei aqui");
+          messageDiv.textContent = 'Usuário não encontrado';
+          messageDiv.style.color = 'red';
+        }
+
+        else {
+          messageDiv.textContent = 'Usuário ou senha incorretos';
+          messageDiv.style.color = 'red';
         }
       })
       .catch((error) => {
